@@ -365,7 +365,7 @@ function speak(text) {
 function greet() {
 
     const text =
-        "Hola, Sebas. Soy JARVIS. Estoy listo para ayudarte. ¿Qué necesitas?";
+        "Hola, Sebastian. Soy JARVIS. Estoy listo para ayudarte. ¿Qué necesitas?";
 
     document.getElementById("message").innerText = text;
 
@@ -382,7 +382,7 @@ function answer(text) {
 
     if (lower.includes("hola")) {
 
-        response = "Hola, Sebas. ¿Qué necesitas?";
+        response = "Hola, Sebastian. ¿Qué necesitas?";
 
     } else if (lower.includes("quién eres") || lower.includes("quien eres")) {
 
@@ -454,7 +454,7 @@ function startListening() {
             "● ESCUCHANDO";
 
         document.getElementById("message").innerText =
-            "Te escucho, Sebas...";
+            "Te escucho, Sebastian...";
     };
 
     recognition.onresult = function(event) {
@@ -490,7 +490,7 @@ function startListening() {
 window.addEventListener("load", function() {
 
     document.getElementById("message").innerText =
-        "Hola, Sebas. Pulsa SALUDAR para escuchar mi voz.";
+        "Hola, Sebastian. Pulsa SALUDAR para escuchar mi voz.";
 
 });
 
