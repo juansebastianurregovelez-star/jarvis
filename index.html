@@ -1,1 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JARVIS — Asistente Virtual</title>
 
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at center, #10243a 0%, #050a10 45%, #020407 100%);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 18px;
+}
+
+/* ENCABEZADO */
+
+header {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+.status {
+    color: #62d9ff;
+    font-size: 13px;
+}
+
+/* CENTRO */
+
+.main {
+    flex: 1;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.orb {
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 35px;
+
+    background:
+        radial-gradient(circle, #ffffff 0%, #7eeaff 5%, #168cb8 20%, #071a28 58%, transparent 70%);
+
+    box-shadow:
+        0 0 25px #26cfff,
+        0 0 70px rgba(38, 207, 255, 0.55),
+        inset 0 0 35px #7eeaff;
+
+    animation: pulse 3s infinite ease-in-out;
+}
+
+.orb::before,
+.orb::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgba(78, 218, 255, 0.7);
+}
+
+.orb::before {
+    width: 270px;
+    height: 270px;
+    animation: rotate 8s linear infinite;
+}
+
+.orb::after {
+    width: 310px;
+    height: 310px;
+    border-style: dashed;
+    opacity: 0.45;
+    animation: rotateReverse 14s linear infinite;
+}
+
+.core {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: white;
+    box-shadow:
+        0 0 20px white,
+        0 0 45px #3edcff;
+}
+
+/* TEXTO */
+
+.title {
+    font-size: 42px;
+    letter-spacing: 8px;
+    margin-bottom: 12px;
+}
+
+.message {
+    text-align: center;
+    font-size: 20px;
+    color: #d7f7ff;
+    min-height: 55px;
+    max-width: 700px;
+    line-height: 1.5;
+}
+
+/* BOTÓN */
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    color: white;
+    background: rgba(17, 37, 53, 0.9);
+    border: 1px solid #2bd5ff;
+    border-radius: 30px;
+    padding: 14px 25px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #123b51;
+    box-shadow: 0 0 25px rgba(43, 213, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.voice-button {
+    min-width: 150px;
+}
+
+/* CHAT */
+
+.chat {
+    width: 100%;
+    max-width: 700px;
+    margin-top: 35px;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    flex: 1;
+    padding: 15px 18px;
+    border-radius: 30px;
+    border: 1px solid #24495d;
+    outline: none;
+    background: rgba(4, 12, 18, 0.9);
+    color: white;
+    font-size: 16px;
+}
+
+input:focus {
+    border-color: #2bd5ff;
+    box-shadow: 0 0 15px rgba(43, 213, 255, 0.25);
+}
+
+/* PIE */
+
+footer {
+    margin-top: 30px;
+    color: #607985;
+    font-size: 12px;
+}
+
+/* ANIMACIONES */
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.06);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateReverse {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+/* CELULAR */
+
+@media (max-width: 600px) {
+
+    .title {
+        font-size: 30px;
+        letter-spacing: 5px;
+    }
+
+    .orb {
+        width: 180px;
+        height: 180px;
+    }
+
+    .orb::before {
+        width: 215px;
+        height: 215px;
+    }
+
+    .orb::after {
+        width: 245px;
+        height: 245px;
+    }
+
+    .message {
+        font-size: 17px;
+    }
+
+    .input-area {
+        flex-direction: column;
+    }
+
+    .buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 250px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+    <div class="logo">JARVIS</div>
+    <div class="status" id="status">● EN ESPERA</div>
+</header>
+
+<main class="main">
+
+    <div class="orb">
+        <div class="core"></div>
+    </div>
+
+    <h1 class="title">JARVIS</h1>
+
+    <div class="message" id="message">
+        Hola, Sebas. Estoy listo para ayudarte.
+    </div>
+
+    <div class="buttons">
+        <button class="voice-button" onclick="startListening()">
+            🎙️ HABLAR
+        </button>
+
+        <button onclick="greet()">
+            🔊 SALUDAR
+        </button>
+    </div>
+
+    <div class="chat">
+
+        <div class="input-area">
+            <input
+                id="textInput"
+                type="text"
+                placeholder="Escribe un mensaje..."
+                onkeydown="if(event.key === 'Enter') sendMessage()"
+            >
+
+            <button onclick="sendMessage()">➤</button>
+        </div>
+
+    </div>
+
+</main>
+
+<footer>
+    JARVIS • Proyecto de asistente virtual de Sebas
+</footer>
+
+</div>
+
+<script>
+
+/* VOZ */
+
+function speak(text) {
+
+    if (!("speechSynthesis" in window)) {
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const voice = new SpeechSynthesisUtterance(text);
+
+    voice.lang = "es-CO";
+    voice.rate = 0.95;
+    voice.pitch = 0.9;
+    voice.volume = 1;
+
+    voice.onstart = function() {
+        document.getElementById("status").innerText = "● HABLANDO";
+    };
+
+    voice.onend = function() {
+        document.getElementById("status").innerText = "● EN ESPERA";
+    };
+
+    window.speechSynthesis.speak(voice);
+}
+
+/* SALUDO */
+
+function greet() {
+
+    const text =
+        "Hola, Sebas. Soy JARVIS. Estoy listo para ayudarte. ¿Qué necesitas?";
+
+    document.getElementById("message").innerText = text;
+
+    speak(text);
+}
+
+/* RESPUESTAS TEMPORALES */
+
+function answer(text) {
+
+    const lower = text.toLowerCase();
+
+    let response;
+
+    if (lower.includes("hola")) {
+
+        response = "Hola, Sebas. ¿Qué necesitas?";
+
+    } else if (lower.includes("quién eres") || lower.includes("quien eres")) {
+
+        response =
+            "Soy JARVIS, tu asistente virtual. Esta es mi primera versión.";
+
+    } else if (lower.includes("cómo estás") || lower.includes("como estas")) {
+
+        response =
+            "Todos mis sistemas funcionan correctamente.";
+
+    } else {
+
+        response =
+            "He recibido tu mensaje, Sebas. Mi cerebro de inteligencia artificial todavía está en construcción.";
+
+    }
+
+    document.getElementById("message").innerText = response;
+
+    speak(response);
+}
+
+/* TEXTO */
+
+function sendMessage() {
+
+    const input = document.getElementById("textInput");
+
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    document.getElementById("message").innerText =
+        "Procesando: " + text;
+
+    input.value = "";
+
+    setTimeout(function() {
+        answer(text);
+    }, 500);
+}
+
+/* RECONOCIMIENTO DE VOZ */
+
+function startListening() {
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+
+        document.getElementById("message").innerText =
+            "Tu navegador no permite reconocimiento de voz. Prueba con Google Chrome.";
+
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = "es-CO";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onstart = function() {
+
+        document.getElementById("status").innerText =
+            "● ESCUCHANDO";
+
+        document.getElementById("message").innerText =
+            "Te escucho, Sebas...";
+    };
+
+    recognition.onresult = function(event) {
+
+        const text =
+            event.results[0][0].transcript;
+
+        document.getElementById("message").innerText =
+            "Tú: " + text;
+
+        answer(text);
+    };
+
+    recognition.onerror = function() {
+
+        document.getElementById("status").innerText =
+            "● ERROR DE MICRÓFONO";
+
+        document.getElementById("message").innerText =
+            "No pude escuchar lo que dijiste.";
+    };
+
+    recognition.onend = function() {
+
+        document.getElementById("status").innerText =
+            "● EN ESPERA";
+    };
+
+    recognition.start();
+}
+
+/* MENSAJE INICIAL */
+
+window.addEventListener("load", function() {
+
+    document.getElementById("message").innerText =
+        "Hola, Sebas. Pulsa «SALUDAR» para escuchar mi voz.";
+
+});
+
+</script>
+
+</body>
+</html>
